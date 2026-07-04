@@ -7,3 +7,5 @@ const NoteDetailPage = () => {
 }
 
 export default NoteDetailPage
+//
+//details page of the notes
