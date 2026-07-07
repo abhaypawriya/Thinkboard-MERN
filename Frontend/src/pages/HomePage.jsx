@@ -56,5 +56,5 @@ const HomePage = () => {
       </div>
   )
 }
-//
+// home page connected 
 export default HomePage
