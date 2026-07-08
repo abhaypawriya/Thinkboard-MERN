@@ -1,15 +1,42 @@
-import { ArrowLeft, ArrowLeftIcon } from 'lucide-react';
+import { ArrowLeft, ArrowLeftIcon, Icon } from 'lucide-react';
 import React, { useState } from 'react'
-import { Link } from 'react-router';
-
+import { Link, Navigate, useNavigate } from 'react-router';
+import { toast } from 'react-hot-toast';
+import axios from "axios"
 const CreatePage = () => {
   const [title,setTitle] = useState("");
   const [content,setContent] = useState("")
   const [loading,setLoading] = useState(false)
 
-  const handleSubmit = () => {
-    console.log(title)
-    console.log(content)
+  const Navigate = useNavigate()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // if(!title.trim() || !content.trim()){
+    //   toast.error("All fields are required");
+    //   return;
+    // }
+    setLoading(true);
+    try {
+      await axios.post("http://localhost:5001/api/notes",{
+        title,
+        content
+      })
+      toast.success("Note Created Successfully")
+      Navigate("/")
+    } catch (error) {
+      console.log("Error creating Note", error)
+      if(error.response.status === 429){
+        toast.error("Slow down!! , You are creating notes too fast",{
+          duration:4000,
+          icon:"😐"
+        });
+      }else{
+          toast.error("failed to create Note")
+      }
+      
+    } finally {
+      setLoading(false);
+    }
   }
   return (
     <div className='min-h-screen bg-base-200'>
@@ -61,6 +88,5 @@ const CreatePage = () => {
     </div>
   )
 }
-//
-//
+
 export default CreatePage
