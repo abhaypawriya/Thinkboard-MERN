@@ -46,5 +46,4 @@ app.listen(PORT, () => {
     console.log("server started on port", PORT);
     });
 })
-//GS3VsVASkOMBLAvg
-// mongodb+srv://theabhaypawriya_db_user:GS3VsVASkOMBLAvg@cluster0.l87riam.mongodb.net/?appName=Cluster0
+
